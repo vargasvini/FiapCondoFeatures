@@ -71,7 +71,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpGet("{idImovel}")]
+        [HttpGet("{id}")]
         [SwaggerOperation(
             Summary = "Retorna um imóvel com seu respectivo tipo por Id.",
             Description = "Endpoint para retornar um imóvel por Id",
@@ -80,11 +80,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Imovel))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-        public IActionResult GetById(int idImovel)
+        public IActionResult GetById(int id)
         {
             try
             {
-                return Ok(_imovelRepository.GetById(idImovel));
+                return Ok(_imovelRepository.GetById(id));
             }
             catch (Exception)
             {
@@ -92,7 +92,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpDelete("{idImovel}")]
+        [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Remove um imóvel por Id.",
             Description = "Endpoint para remover um imóvel por Id",
@@ -101,11 +101,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Delete(int idImovel)
+        public IActionResult Delete(int id)
         {
             try
             {
-                return Ok(_imovelRepository.DeleteById(idImovel));
+                return Ok(_imovelRepository.DeleteById(id));
             }
             catch (Exception)
             {
@@ -113,7 +113,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpPut("{idImovel}")]
+        [HttpPut("{id}")]
         [SwaggerOperation(
             Summary = "Atualiza um imóvel por Id.",
             Description = "Endpoint para atualizar um imóvel por Id",
@@ -122,11 +122,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Put(int idImovel, [FromBody] ImovelDTO imovelDTO)
+        public IActionResult Put(int id, [FromBody] ImovelDTO imovelDTO)
         {
             try
             {
-                return Ok(_imovelRepository.UpdateById(idImovel, imovelDTO));
+                return Ok(_imovelRepository.UpdateById(id, imovelDTO));
             }
             catch (Exception)
             {

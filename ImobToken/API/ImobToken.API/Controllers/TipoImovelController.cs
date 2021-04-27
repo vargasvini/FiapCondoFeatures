@@ -67,7 +67,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpGet("{idTipoImovel}")]
+        [HttpGet("{id}")]
         [SwaggerOperation(
             Summary = "Retorna um tipo de imóvel por Id.",
             Description = "Endpoint para retornar um tipo de imóvel por Id",
@@ -76,11 +76,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TipoImovel))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-        public IActionResult GetById(int idTipoImovel)
+        public IActionResult GetById(int id)
         {
             try
             {
-                return Ok(_tipoImovelRepository.GetById(idTipoImovel));
+                return Ok(_tipoImovelRepository.GetById(id));
             }
             catch (Exception)
             {
@@ -88,7 +88,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpDelete("{idTipoImovel}")]
+        [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Remove um tipo de imóvel por Id.",
             Description = "Endpoint para remover um tipo de imóvel por Id",
@@ -97,11 +97,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Delete(int idTipoImovel)
+        public IActionResult Delete(int id)
         {
             try
             {
-                return Ok(_tipoImovelRepository.DeleteById(idTipoImovel));
+                return Ok(_tipoImovelRepository.DeleteById(id));
             }
             catch (Exception)
             {
@@ -109,7 +109,7 @@ namespace ImobToken.API.Controllers
             }
         }
 
-        [HttpPut("{idTipoImovel}")]
+        [HttpPut("{id}")]
         [SwaggerOperation(
             Summary = "Atualiza um tipo de imóvel por Id.",
             Description = "Endpoint para atualizar um tipo de imóvel por Id",
@@ -118,11 +118,11 @@ namespace ImobToken.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Put(int idTipoImovel, [FromBody] TipoImovelDTO tipoImovelDTO)
+        public IActionResult Put(int id, [FromBody] TipoImovelDTO tipoImovelDTO)
         {
             try
             {
-                return Ok(_tipoImovelRepository.UpdateById(idTipoImovel, tipoImovelDTO));
+                return Ok(_tipoImovelRepository.UpdateById(id, tipoImovelDTO));
             }
             catch (Exception)
             {
