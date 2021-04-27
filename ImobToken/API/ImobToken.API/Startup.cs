@@ -9,8 +9,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Hosting;
 using ImobToken.Data;
-using ImboToken.Data.Repository.Interface;
-using ImboToken.Data.Repository.Implementation;
+using ImobToken.Data.Repository.Interface;
+using ImobToken.Data.Repository.Implementation;
 
 namespace ImobToken.API
 {
@@ -27,9 +27,16 @@ namespace ImobToken.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             SwaggerServices(services);
             services.AddScoped<IImovelRepository, ImovelRepository>();
+            services.AddScoped<ITipoImovelRepository, TipoImovelRepository>();
             services.AddDbContext<MainContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

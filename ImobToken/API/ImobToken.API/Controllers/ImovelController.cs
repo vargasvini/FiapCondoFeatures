@@ -1,4 +1,4 @@
-﻿using ImboToken.Data.Repository.Interface;
+﻿using ImobToken.Data.Repository.Interface;
 using ImobToken.Domain;
 using ImobToken.Domain.DTO;
 using Microsoft.AspNetCore.Http;
@@ -85,6 +85,48 @@ namespace ImobToken.API.Controllers
             try
             {
                 return Ok(_imovelRepository.GetById(idImovel));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("{idImovel}")]
+        [SwaggerOperation(
+            Summary = "Remove um imóvel por Id.",
+            Description = "Endpoint para remover um imóvel por Id",
+            OperationId = "Delete"
+        )]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete(int idImovel)
+        {
+            try
+            {
+                return Ok(_imovelRepository.DeleteById(idImovel));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut("{idImovel}")]
+        [SwaggerOperation(
+            Summary = "Atualiza um imóvel por Id.",
+            Description = "Endpoint para atualizar um imóvel por Id",
+            OperationId = "Put"
+        )]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Put(int idImovel, [FromBody] ImovelDTO imovelDTO)
+        {
+            try
+            {
+                return Ok(_imovelRepository.UpdateById(idImovel, imovelDTO));
             }
             catch (Exception)
             {

@@ -7,7 +7,6 @@ namespace ImobToken.Data
 {
     public class MainContext : DbContext
     {
-        public DbSet<Teste> Teste { get; set; }
         public DbSet<Imovel> Imovel { get; set; }
         public DbSet<TipoImovel> TipoImovel { get; set; }
 
