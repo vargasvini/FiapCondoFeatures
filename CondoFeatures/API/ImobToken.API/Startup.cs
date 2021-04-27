@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CondoFeatures.Data.Repository.Interface;
-using CondoFeatures.Data.Repository.Implementation;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Hosting;
+using ImobToken.Data;
+using ImboToken.Data.Repository.Interface;
+using ImboToken.Data.Repository.Implementation;
 
-namespace CondoFeatures.API
+namespace ImobToken.API
 {
     public class Startup
     {
@@ -27,7 +28,8 @@ namespace CondoFeatures.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             SwaggerServices(services);
-            services.AddScoped<IPingRepository, PingRepository>();
+            services.AddScoped<IImovelRepository, ImovelRepository>();
+            services.AddDbContext<MainContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +41,7 @@ namespace CondoFeatures.API
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CondoFeaturesAPI v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ImobTokenAPI v1"));
 
             var cultureInfo = new CultureInfo("pt-BR");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -76,7 +78,7 @@ namespace CondoFeatures.API
             services.AddSwaggerGen(c =>
             {
                 c.EnableAnnotations();
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CondoFeaturesAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ImobTokenAPI", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Para as APIs com autenticacão use o header com token, como nexemplo: 'Bearer 12345abcdef'",
