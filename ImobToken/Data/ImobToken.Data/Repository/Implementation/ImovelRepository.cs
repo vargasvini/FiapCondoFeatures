@@ -30,7 +30,15 @@ namespace ImobToken.Data.Repository.Implementation
 
         public IList<Imovel> GetAll()
         {
-            return _db.Imovel.Include(t => t.TipoImovel).ToList();
+            try
+            {
+                return _db.Imovel.Include(t => t.TipoImovel).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public Imovel GetById(int idImovel)
